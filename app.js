@@ -25,9 +25,8 @@ function checkLang() {
 }
 
 function checkIgnored(text) {
-  if (!checkLang) return 1;
-  const check = /friend|znaj|freund|report|zgłoś|melden|mark|spam/i;
-  return text.match(check);
+  const check = /friend|znaj|freund|tag/i;
+  if (!checkLang() || (text && text.match(check))) return 1;
 }
 
 function findLayer() {
@@ -63,9 +62,25 @@ function findRemove() {
   let text = button[lastItemNr].innerHTML;
   if (checkIgnored(text)) return ignoredItems++;
 
-  log(BLUE, button[lastItemNr].innerHTML);
+  if (text.match(/report|zgłoś|melden|mark|oznacz|spam/i))
+    return tryDelete(button, lastItemNr);
+
+  log(RED, button[lastItemNr].innerHTML);
   button[lastItemNr].click();
   deletedCounter++;
+}
+
+function tryDelete(button, lastItemNr) {
+  let temp;
+  for (let i = 1; i < 5; i++) {
+    temp = button[lastItemNr - i];
+    if (temp && temp.innerHTML.match(/delete|usuń|Löschen/i)) {
+      log(RED, temp.innerHTML);
+      temp.click();
+      return deletedCounter++;
+    }
+  }
+  ignoredItems++;
 }
 
 function awaitForItems(nr, ignored, tries) {
