@@ -44,9 +44,7 @@ function findLayer() {
 
 function findElement(nr = 0) {
   findLayer();
-  let button = document.getElementsByClassName(
-    "_42ft _42fu _4-s1 _2agf _4o_4 _p _42gx"
-  );
+  let button = document.getElementsByClassName("_42ft _42fu _4-s1 _2agf _4o_4 _p _42gx");
   if (!button.length || button[nr] === undefined) return 0;
 
   button[nr].click();
@@ -62,8 +60,7 @@ function findRemove() {
   let text = button[lastItemNr].innerHTML;
   if (checkIgnored(text)) return ignoredItems++;
 
-  if (text.match(/report|zgłoś|melden|mark|oznacz|spam/i))
-    return tryDelete(button, lastItemNr);
+  if (text.match(/report|zgłoś|melden|mark|oznacz|spam/i)) return tryDelete(button, lastItemNr);
 
   log(RED, button[lastItemNr].innerHTML);
   button[lastItemNr].click();
@@ -88,11 +85,11 @@ function awaitForItems(nr, ignored, tries) {
   scrollBy(0, 1000);
   setTimeout(() => {
     log(BLUE, "Process continued!");
-    deleteMany(nr, ignored, tries);
+    clean(nr, ignored, tries);
   }, 1000);
 }
 
-function deleteMany(nr = 0, ignored = 0, tries = tryToEnd) {
+function clean(nr = 0, ignored = 0, tries = tryToEnd) {
   if (nr < 1) return log(RED, "Invalid number of items to delete!");
   if (!checkLang())
     return log(
