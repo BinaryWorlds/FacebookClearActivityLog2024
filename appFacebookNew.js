@@ -5,7 +5,10 @@ const BLUE = "\x1b[34m";
 const OBJECT_ACTION = "tv7at329 nhd2j8a9 tdjehn4e";
 const DELETE_BUTTON = "sj5x9vvc dwo3fsh8";
 const SCROLL_AREA = "q5bimw55 rpm2j7zs k7i0oixp";
-const ERROR_LAYER = "s1i5eluu bwm1u5wc";
+const ERROR_LAYER = "s1i5eluu";
+
+const DELETE_NAMES = /delete|usuń|Löschen|lubi|like|reak|reac|Gefällt|kosz|Recycle|trash|Papierkorb/i;
+const IGNORED_NAMES = /friend|znaj|freund|tag/i;
 
 let app = {
   forceStop: false,
@@ -39,8 +42,7 @@ function checkLang() {
 }
 
 function checkIgnored(text) {
-  const check = /friend|znaj|freund|tag/i;
-  if (!checkLang() || (text && text.match(check))) return 1;
+  if (!checkLang() || (text && text.match(IGNORED_NAMES))) return 1;
 }
 
 function clean(nr = 0, ignored = app.ignoredItems) {
@@ -68,7 +70,8 @@ function findElement() {
   findLayer();
   const object = get(OBJECT_ACTION);
 
-  if (!object.length || object[app.ignoredItems] === undefined) return initMore();
+  if (!object.length || object[app.ignoredItems] === undefined)
+    return initMore();
 
   app.tries = 0;
 
@@ -77,7 +80,13 @@ function findElement() {
 
   let counterTries = [0],
     timerId = [];
-  timerId[0] = setInterval(deleteElement, app.actionDelay, timerId, counterTries);
+
+  timerId[0] = setInterval(
+    deleteElement,
+    app.actionDelay,
+    timerId,
+    counterTries
+  );
 }
 
 function deleteElement(timerId, counterTries) {
@@ -100,8 +109,7 @@ function deleteElement(timerId, counterTries) {
         next();
         return app.ignoredItems++;
       }
-
-      if (text.match(/delete|usuń|Löschen|lubi|like|reak|reac|Gefällt/i)) {
+      if (text.match(DELETE_NAMES)) {
         log(RED, buttons[i].innerText);
         buttons[i].click();
         app.deletedCounter++;
@@ -119,7 +127,10 @@ function deleteElement(timerId, counterTries) {
 }
 
 function next() {
-  if (app.forceStop || app.deletedCounter >= app.toDeleteAmount) return printResults();
+  if (app.forceStop || app.deletedCounter >= app.toDeleteAmount) {
+    app.timerId = setTimeout(findLayer, 500);
+    return printResults();
+  }
   app.timerId = setInterval(findElement, app.actionDelay);
 }
 
@@ -139,6 +150,20 @@ function initMore() {
 }
 
 function printResults() {
-  log(GREEN, `Removed ${app.deletedCounter} objects \n${app.ignoredItems} ignored`);
+  log(
+    GREEN,
+    `Removed ${app.deletedCounter} objects \n${app.ignoredItems} ignored`
+  );
   app.processInProgress = false;
+}
+
+function toolFindClasses(classes) {
+  // e.g. "oajrlxb2 g5ia77u1 qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 j83agx80 p7hjln8o"
+  const list = classes.split(" ");
+  const length = list.length;
+  let result;
+  for (let i = 0; i < length; i++) {
+    result = get(list[i]);
+    console.log(result.length, list[i]);
+  }
 }
