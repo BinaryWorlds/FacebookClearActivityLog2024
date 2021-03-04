@@ -5,7 +5,7 @@ const BLUE = "\x1b[34m";
 const OBJECT_ACTION = "tv7at329 nhd2j8a9 tdjehn4e";
 const DELETE_BUTTON = "sj5x9vvc dwo3fsh8";
 const SCROLL_AREA = "q5bimw55 rpm2j7zs k7i0oixp";
-const ERROR_LAYER = "s1i5eluu";
+const CONFIRM_LAYER = "s1i5eluu"; // and ERROR_LAYER
 
 const DELETE_NAMES = /delete|usuń|Löschen|lubi|like|reak|reac|Gefällt|kosz|Recycle|trash|Papierkorb/i;
 const IGNORED_NAMES = /friend|znaj|freund|tag/i;
@@ -135,7 +135,7 @@ function next() {
 }
 
 function findLayer() {
-  const layer = get(ERROR_LAYER);
+  const layer = get(CONFIRM_LAYER);
   if (layer.length) layer[0].click();
 }
 
@@ -155,15 +155,4 @@ function printResults() {
     `Removed ${app.deletedCounter} objects \n${app.ignoredItems} ignored`
   );
   app.processInProgress = false;
-}
-
-function toolFindClasses(classes) {
-  // e.g. "oajrlxb2 g5ia77u1 qu0x051f esr5mh6w e9989ue4 r7d6kgcz rq0escxv nhd2j8a9 j83agx80 p7hjln8o"
-  const list = classes.split(" ");
-  const length = list.length;
-  let result;
-  for (let i = 0; i < length; i++) {
-    result = get(list[i]);
-    console.log(result.length, list[i]);
-  }
 }
