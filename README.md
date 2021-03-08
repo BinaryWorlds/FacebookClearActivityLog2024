@@ -5,6 +5,11 @@ Or maybe it's better to remove all activity from the past?
 
 This piece of code can help you with this.
 
+![work_well](work_well.gif)
+
+**If script didn't work - send me a messange or fix it yourself**
+(checkout tool/Readme)
+
 ## Start
 
 Only English, Polish and Deutch are supported.
