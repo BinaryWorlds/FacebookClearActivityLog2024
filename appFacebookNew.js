@@ -5,7 +5,7 @@ const CYAN = "\x1b[36m";
 const OBJECT_ACTION = "tv7at329 nhd2j8a9 tdjehn4e thwo4zme";
 const DELETE_BUTTON = "sj5x9vvc dwo3fsh8";
 const SCROLL_AREA = "q5bimw55 rpm2j7zs k7i0oixp";
-const CONFIRM_LAYER = "s1i5eluu izx4hr6d";
+const CONFIRM_LAYER = "s1i5eluu ak7q8e6j";
 
 const DELETE_NAMES = /delete|usuń|Löschen|lubi|like|reak|reac|Gefällt|kosz|Recycle|trash|Papierkorb/i;
 const IGNORED_NAMES = /friend|znaj|freund|tag/i;
