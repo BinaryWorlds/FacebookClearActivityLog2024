@@ -52,7 +52,7 @@ function clean(nr = 0, ignored = app.ignoredItems) {
   if (!checkLang())
     return log(
       RED,
-      "Your current language isn't supported!\nGo to facebook settings and change it to English, Polish or Deutch!"
+      "Your current language isn't supported!\nGo to facebook settings and change it to English, Polish or Deutsche!"
     );
   log(
     GREEN,
