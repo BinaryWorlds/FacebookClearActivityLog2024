@@ -1,4 +1,4 @@
-let OBJECT_ACTION = "tv7at329 nhd2j8a9 tdjehn4e thwo4zme";
+let OBJECT_ACTION = "tv7at329 nhd2j8a9 thwo4zme";
 let DELETE_BUTTON = "sj5x9vvc dwo3fsh8";
 let SCROLL_AREA = "q5bimw55 rpm2j7zs k7i0oixp";
 let CONFIRM_LAYER = "s1i5eluu ak7q8e6j"; // and ERROR_LAYER

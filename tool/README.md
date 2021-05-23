@@ -79,7 +79,7 @@ in appFacebookNew.js
 
 ![CONFIRM_LAYER](CONFIRM_LAYER.jpg)
 
-(search confirm layer only when visible, script select first result - dont worry if other elements found - they can't be click())
+(search confirm layer only when visible, script select first result - don't worry if other elements found - they can't be click())
 
 **SCROLL_AREA:**
 

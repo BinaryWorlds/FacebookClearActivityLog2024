@@ -7,17 +7,17 @@ This piece of code can help you with this.
 
 ![work_well](work_well.gif)
 
-**If script didn't work - send me a messange or fix it yourself**
-(checkout tool/Readme)
+**If script didn't work - send me a message or fix it yourself**
+(checkout [tool/Readme](tool/README.md))
 
 ## Start
 
-Only English, Polish and Deutch are supported.
-If u use slang or other lang, u must change it;
+Only English, Polish and German are supported.
+If you use slang or other lang, you must change it.
 
 Your friends will not be removed, but I'm not responsible for any errors.
 
-**For best, run app on fresh page(dont click anywhere to delete).**
+**For best, run app on fresh page (don't click anywhere to delete).**
 
 ## Cancel
 
@@ -27,7 +27,7 @@ You can stop app by enter:
 stop();
 ```
 
-or click somewhere on facebook page(background) and
+or click somewhere on facebook page (background) and
 
 > press ESC.
 
@@ -56,7 +56,7 @@ clean(nr, ignored);
 - nr - maxium number of items to delete,
 - ignored - how many objects to ignore, from the beginning of the list; default 0
 
-If you run app again(without second argument), ignored items will be saved.
+If you run app again (without second argument), ignored items will be saved.
 You can check it by type:
 
 ```
@@ -67,9 +67,9 @@ app.ignoredItems
 
 1. Sign in.
 2. Go to activity log.
-3. On the left u can select subcategory.
+3. On the left you can select subcategory.
 4. Refresh page.
-   > If you dont, running code logout you(if you go to activity log from menu, with logout button)
+   > If you don't, running code logout you (if you go to activity log from menu, with logout button).
 5. Open DevTool.
    > In chrome press F12.
 6. Go to console.
@@ -87,7 +87,7 @@ clean(1000);
 Function takes three arguments
 clean(nr, ignored, tries);
 
-- nr - maxium number of items to delete,
+- nr - maximum number of items to delete,
 - ignored - how many objects to ignore, from the beginning of the list; default 0
 - tries - how many times in a row, wait for content to load, default 10; Don't change this value.
 
@@ -95,6 +95,6 @@ clean(nr, ignored, tries);
 
 > If there are no more objects to delete, app ends after the set number of attemps.
 
-If facebook stop loading content, click next year in the timeline(filter: activity log, right-up) or refresh page.
+If facebook stop loading content, click next year in the timeline (filter: activity log, right-up) or refresh page.
 
-> If u refresh page, app will be removed. U must paste code again.
+> If you refresh page, app will be removed. You must paste code again.

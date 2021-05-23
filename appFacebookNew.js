@@ -1,13 +1,14 @@
-const RED = "\x1b[31m";
-const GREEN = "\x1b[32m";
-const CYAN = "\x1b[36m";
+const RED = "RED";
+const GREEN = "GREEN";
+const ORANGE = "ORANGE";
 
-const OBJECT_ACTION = "tv7at329 nhd2j8a9 tdjehn4e thwo4zme";
+const OBJECT_ACTION = "tv7at329 nhd2j8a9 thwo4zme";
 const DELETE_BUTTON = "sj5x9vvc dwo3fsh8";
 const SCROLL_AREA = "q5bimw55 rpm2j7zs k7i0oixp";
-const CONFIRM_LAYER = "s1i5eluu ak7q8e6j";
+const CONFIRM_LAYER = "s1i5eluu ak7q8e6j"; // and ERROR_LAYER
 
-const DELETE_NAMES = /delete|usuń|Löschen|lubi|like|reak|reac|Gefällt|kosz|Recycle|trash|Papierkorb/i;
+const DELETE_NAMES =
+  /delete|usuń|Löschen|lubi|like|reak|reac|Gefällt|kosz|Recycle|trash|Papierkorb/i;
 const IGNORED_NAMES = /friend|znaj|freund|tag/i;
 const SUPPORTED_LANG = /en|pl|de/;
 
@@ -27,7 +28,7 @@ function get(className) {
 }
 
 function log(color, text) {
-  console.log(`${color}${text}`);
+  console.log(`%c${text}`, `color:${color}`);
 }
 
 function stop() {
@@ -52,7 +53,7 @@ function clean(nr = 0, ignored = app.ignoredItems) {
   if (!checkLang())
     return log(
       RED,
-      "Your current language isn't supported!\nGo to facebook settings and change it to English, Polish or Deutch!"
+      "Your current language isn't supported!\nGo to facebook settings and change it to English, Polish or German!"
     );
   log(
     GREEN,
@@ -123,7 +124,7 @@ function deleteElement(timerId, counterTries) {
   if (++counterTries[0] > 5) {
     app.ignoredItems++;
     clearInterval(timerId[0]);
-    log(CYAN, "No delete button!");
+    log(ORANGE, "No delete button!");
     next();
   }
 }
@@ -146,9 +147,9 @@ function initMore() {
     clearInterval(app.timerId);
     return printResults();
   }
-  if (app.tries++ === 0) log(CYAN, `Waiting for load items!`);
-  const scrollArea = get(SCROLL_AREA);
-  scrollArea[0].scrollBy(0, 1000);
+  if (app.tries++ === 0) log(ORANGE, `Waiting for load items!`);
+  // const scrollArea = get(SCROLL_AREA);
+  window.scrollBy(0, 1000);
 }
 
 function printResults() {
