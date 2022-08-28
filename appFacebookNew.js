@@ -2,10 +2,10 @@ const RED = "RED";
 const GREEN = "GREEN";
 const ORANGE = "ORANGE";
 
-const OBJECT_ACTION = "tv7at329 nhd2j8a9 thwo4zme";
-const DELETE_BUTTON = "sj5x9vvc dwo3fsh8";
+const OBJECT_ACTION = "n3hqoq4p jvc6uz2b";
+const DELETE_BUTTON = "nu7423ey s5oniofx qgrdou9d";
 const SCROLL_AREA = "q5bimw55 rpm2j7zs k7i0oixp";
-const CONFIRM_LAYER = "s1i5eluu ak7q8e6j"; // and ERROR_LAYER
+const CONFIRM_LAYER = "k70v3m9n"; // and ERROR_LAYER
 
 const DELETE_NAMES =
   /delete|usuń|Löschen|lubi|like|reak|reac|Gefällt|kosz|Recycle|trash|Papierkorb/i;

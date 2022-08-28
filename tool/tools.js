@@ -1,7 +1,7 @@
-let OBJECT_ACTION = "tv7at329 nhd2j8a9 thwo4zme";
-let DELETE_BUTTON = "sj5x9vvc dwo3fsh8";
+let OBJECT_ACTION = "n3hqoq4p jvc6uz2b";
+let DELETE_BUTTON = "nu7423ey s5oniofx qgrdou9d";
 let SCROLL_AREA = "q5bimw55 rpm2j7zs k7i0oixp";
-let CONFIRM_LAYER = "s1i5eluu ak7q8e6j"; // and ERROR_LAYER
+let CONFIRM_LAYER = "k70v3m9n"; // and ERROR_LAYER
 
 function swap(items, leftIndex, rightIndex) {
   let temp = items[leftIndex];
@@ -58,4 +58,16 @@ function checkMyClass(classList) {
       "No object found. If object is visible on screen - change input class "
     );
   return result;
+}
+
+function findUnique(correctClassList, wrongClassList) {
+  const correctList = correctClassList.split(" ");
+  const wrongList = wrongClassList.split(" ");
+
+  return correctList.filter((c) => wrongList.findIndex((w) => w === c) === -1);
+}
+
+function printUnique(correctClassList, wrongClassList) {
+  const unique = findUnique(correctClassList, wrongClassList);
+  return unique.join(" ");
 }
