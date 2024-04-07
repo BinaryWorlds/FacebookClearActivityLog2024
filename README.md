@@ -1,100 +1,77 @@
 # Introduction
 
-New start, new me, new facebook account?
-Or maybe it's better to remove all activity from the past?
+Starting anew?
+Perhaps a fresh Facebook account beckons, or maybe it's time to wipe the slate clean of past activities.
 
-This piece of code can help you with this.
+This piece of code is here to assist you with just that.
 
-![work_well](work_well.gif)
+![old/work_well](old/work_well.gif)
 
-**If script didn't work - send me a message or fix it yourself**
-(checkout [tool/Readme](tool/README.md))
+## Getting Started
 
-## Start
+This script supports English, Polish, and German languages only. If you use slang or any other language, you'll need to make modifications accordingly.
 
-Only English, Polish and German are supported.
-If you use slang or other lang, you must change it.
+Your friends won't be removed, but please note that I'm not responsible for any errors.
 
-Your friends will not be removed, but I'm not responsible for any errors.
+**For best results, run the app on a fresh page (avoid clicking anywhere to delete).**
 
-**For best, run app on fresh page (don't click anywhere to delete).**
+## Cancelling Operation
 
-## Cancel
+You can stop the app by entering:
 
-You can stop app by enter:
-
-```
+```javascript
 stop();
 ```
 
-or click somewhere on facebook page (background) and
+or by clicking somewhere on the Facebook page (background) and then pressing ESC.
 
 > press ESC.
 
 # For new Facebook layout:
 
 1. Sign in.
-2. Go to activity log.
-3. Refresh page.
-4. Open DevTool.
-   > In chrome press F12.
-5. Go to console.
-6. Paste all code from **appFacebookNew.js**
-7. Clear console
-   > CTRL + L
-8. In console:
+2. Create a new post (e.g., 'test' - you can set post visibility to "Only you").
+3. Go to the activity log. From the left menu, choose 'Activity History'. You should see '"Full Name" updated his status' in the Activity log.
+4. Refresh the page.
+5. Open DevTools.
+   > In Chrome, press F12.
+6. Go to the console.
+7. Paste all code from **FacebookClearAcivityLog.js**
+8. In the dialog box, type '1' - Record clicks for configuration.
+   1. Choose the 'three dots' button.
+   2. Click 'Move to bin'.
+   3. Select 'Move to recycle bin' in the pop-up window.
+      > If you make a mistake, you can click on the Facebook window and press ESC.
+9. In the dialog box, type '2'. Your activity will be deleted.
+10. Wait for the process to finish.
 
+If you close the menu, you can reopen it by typing:
+
+```javascript
+menu();
 ```
-clean(1000);
-```
 
-9. Wait for the process to finish.
+If you have recorded clicks, you can also manually run the 'clean' function.
 
-Function takes two arguments
+```javascript
 clean(nr, ignored);
-
-- nr - maxium number of items to delete,
-- ignored - how many objects to ignore, from the beginning of the list; default 0
-
-If you run app again (without second argument), ignored items will be saved.
-You can check it by type:
-
-```
-app.ignoredItems
 ```
 
-# For classic Facebook layout:
+The function takes two arguments:
 
-1. Sign in.
-2. Go to activity log.
-3. On the left you can select subcategory.
-4. Refresh page.
-   > If you don't, running code logout you (if you go to activity log from menu, with logout button).
-5. Open DevTool.
-   > In chrome press F12.
-6. Go to console.
-7. Paste all code from **appFacebookClassic.js**
-8. Clear console
-   > CTRL + L
-9. In console:
+- nr - the maximum number of items to delete,
+- ignored - how many objects to ignore from the beginning of the list; default is 0.
 
+If you run the app again (without the second argument), ignored items will be saved. You can check it by typing:
+
+```javascript
+app.ignoredItems;
 ```
-clean(1000);
-```
-
-9. Wait for the process to finish.
-
-Function takes three arguments
-clean(nr, ignored, tries);
-
-- nr - maximum number of items to delete,
-- ignored - how many objects to ignore, from the beginning of the list; default 0
-- tries - how many times in a row, wait for content to load, default 10; Don't change this value.
 
 ## Troubleshooting
 
-> If there are no more objects to delete, app ends after the set number of attemps.
+> If there are no more objects to delete, the app ends after the set number of attempts.
 
-If facebook stop loading content, click next year in the timeline (filter: activity log, right-up) or refresh page.
+If Facebook stops loading content, click on the next year in the timeline (filter: activity log, upper right) or refresh the page.
 
-> If you refresh page, app will be removed. You must paste code again.
+> If you refresh the page, the app will be removed. You must paste the code again.

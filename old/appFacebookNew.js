@@ -39,18 +39,18 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") stop();
 });
 
-function checkLang() {
+function checkisSupportedLang() {
   return document.documentElement.lang.match(SUPPORTED_LANG);
 }
 
 function checkIgnored(text) {
-  if (!checkLang() || (text && text.match(IGNORED_NAMES))) return 1;
+  if (!checkisSupportedLang() || (text && text.match(IGNORED_NAMES))) return 1;
 }
 
 function clean(nr = 0, ignored = app.ignoredItems) {
   if (app.processInProgress) return log(RED, "Process in progress!");
   if (nr < 1 || ignored < 0) return log(RED, "Invalid number!");
-  if (!checkLang())
+  if (!checkisSupportedLang())
     return log(
       RED,
       "Your current language isn't supported!\nGo to facebook settings and change it to English, Polish or German!"
