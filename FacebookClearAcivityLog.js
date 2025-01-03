@@ -3,7 +3,7 @@ const GREEN = "GREEN";
 const ORANGE = "ORANGE";
 
 const DELETE_NAMES =
-  /delete|usuń|Löschen|lubi|like|reak|reac|Gefällt|kosz|Recycle|trash|Papierkorb/i;
+  /delete|usuń|Löschen|lubi|like|reak|reac|Gefällt|kosz|Recycle|trash|Papierkorb|remove/i;
 const IGNORED_NAMES = /friend|znaj|freund|tag/i;
 const SUPPORTED_LANG = /en|pl|de/;
 
