@@ -3,8 +3,9 @@ const GREEN = "GREEN";
 const ORANGE = "ORANGE";
 
 const DELETE_NAMES =
-  /delete|usuń|Löschen|lubi|like|reak|reac|Gefällt|kosz|Recycle|trash|Papierkorb/i;
+  /delete|usuń|Löschen|like|reak|reac|lubi|Gefällt|Recycle|trash|kosz|Papierkorb/i;
 const IGNORED_NAMES = /friend|znaj|freund|tag/i;
+const IGNORED_BUTTONS = /View|Zobacz|Ansehen|Cancel|Anuluj|Abbrechen/i;
 const SUPPORTED_LANG = /en|pl|de/;
 
 const CLICKS = [
@@ -22,7 +23,7 @@ const MAX_DEPTH = 10;
 const app = {
   forceStop: false,
   processInProgress: false,
-  actionDelay: 100,
+  actionDelay: 300,
   timerId: null,
   ignoredItems: 0,
   deletedCounter: 0,
@@ -34,6 +35,21 @@ const app = {
     confirmDelete: "",
   },
 };
+
+function checkIsActivityLogPath() {
+  const path = window.location.pathname || "";
+  const isActivityLogPath = path.includes("allactivity");
+
+  if (!isActivityLogPath) {
+    log(
+      RED,
+      "Oh no! We've wandered to the wrong place! Increasing app.actionDelay may help avoid this in the future."
+    );
+    stop();
+  }
+
+  return isActivityLogPath;
+}
 
 function get(className) {
   return document.getElementsByClassName(className);
@@ -57,12 +73,20 @@ function cancelCleanOnESC(event) {
   if (event.key === "Escape") stop();
 }
 
-function checkisSupportedLang() {
+function checkIsSupportedLang() {
   return document.documentElement.lang.match(SUPPORTED_LANG);
 }
 
-function checkIsIgnored(text) {
-  if (!checkisSupportedLang() || (text && text.match(IGNORED_NAMES))) return 1;
+function checkIsIgnored(text, ignoredPattern) {
+  return !checkIsSupportedLang() || (text && text.match(ignoredPattern));
+}
+
+function checkIsIgnoredNames(text) {
+  return checkIsIgnored(text, IGNORED_NAMES);
+}
+
+function checkIsIgnoredButtons(text) {
+  return checkIsIgnored(text, IGNORED_BUTTONS);
 }
 
 function printResults() {
@@ -77,7 +101,29 @@ function printResults() {
 
 function findConfirmDeleteLayer() {
   const layer = get(app.targets.confirmDelete);
-  if (layer.length) layer[0].click();
+  if (!layer?.length) return;
+
+  function checkIsDeleteButton(button) {
+    const text = button?.innerText;
+    return text && !checkIsIgnoredButtons(text) && text.match(DELETE_NAMES);
+  }
+
+  for (let i = 0; i < layer.length; i++) {
+    const isDeleteButton = checkIsDeleteButton(layer[i]);
+    if (!isDeleteButton) continue;
+
+    setTimeout(() => {
+      checkIsActivityLogPath();
+      if (app.forceStop) return;
+
+      const isDeleteButton = checkIsDeleteButton(layer[i]);
+      if (!isDeleteButton) return;
+
+      layer[i].click();
+    }, app.actionDelay * 0.7);
+
+    break;
+  }
 }
 
 function initMore() {
@@ -85,11 +131,17 @@ function initMore() {
     clearInterval(app.timerId);
     return printResults();
   }
-  if (app.tries++ === 0) log(ORANGE, `Waiting for load items!`);
+  if (app.tries++ === 0) log(ORANGE, `Waiting for items to load!`);
   window.scrollBy(0, 1000);
 }
 
 function findElement() {
+  checkIsActivityLogPath();
+  if (app.forceStop) {
+    clearInterval(app.timerId);
+    return printResults();
+  }
+
   findConfirmDeleteLayer();
   const object = getFromList(app.targets.objectAction);
 
@@ -121,6 +173,8 @@ function next() {
 }
 
 function deleteElement(timerId, counterTries) {
+  checkIsActivityLogPath();
+
   if (app.forceStop) {
     clearInterval(timerId[0]);
     return printResults();
@@ -136,7 +190,7 @@ function deleteElement(timerId, counterTries) {
     for (let i = 0; i < buttons.length; i++) {
       text = buttons[i].innerText;
 
-      if (checkIsIgnored(text)) {
+      if (checkIsIgnoredNames(text)) {
         next();
         return app.ignoredItems++;
       }
@@ -160,14 +214,14 @@ function deleteElement(timerId, counterTries) {
 function clean(nr = 0, ignored = app.ignoredItems) {
   if (app.processInProgress) return log(RED, "Process in progress!");
   if (nr < 1 || ignored < 0) return log(RED, "Invalid number!");
-  if (!checkisSupportedLang())
+  if (!checkIsSupportedLang())
     return log(
       RED,
       "Your current language is not supported!\nPlease go to Facebook settings and change it to English, Polish, or German.!"
     );
   log(
     GREEN,
-    "Process started.\nClick somewhere on the Facebook page (background) and press ESC to CANCEL."
+    "Process started.\nClick somewhere on the Facebook page (background) and press ESC to cancel."
   );
   app.forceStop = false;
   app.processInProgress = true;
